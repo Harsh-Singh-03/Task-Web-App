@@ -66,7 +66,7 @@ A modern, full-featured **Kanban-style Todo Web App** built with the latest tech
    git clone https://github.com/your-username/todo-kanban-app.git
    cd todo-kanban-app
 
-   ENVIROMENT
+   ENVIROMENT:
 
    DATABASE_URL="DB_URL"
    NEXTAUTH_URL="http://localhost:3000"
