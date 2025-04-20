@@ -8,7 +8,6 @@ import { Column, PRIORITY, Task } from "@/lib/generated/prisma"
 import { useQuery } from "@tanstack/react-query"
 import { Plus } from "lucide-react"
 import { useEffect, useState } from "react"
-import { motion } from "framer-motion"
 
 import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
 import { Separator } from "@/components/ui/separator"
@@ -17,7 +16,6 @@ import { toast } from "sonner"
 import { cn } from "@/lib/utils"
 import { reorderTask } from "@/actions/task.action"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { useSession } from "next-auth/react"
 
 type columnType = Column & {
     tasks: Task[]
@@ -33,8 +31,6 @@ const HomePage = () => {
     const [filter, setFilter] = useState<filterType>({
         priority: null
     })
-
-    const session = useSession()
 
     const { data: serverResponse, isPending } = useQuery({
         queryKey: ["PAGE_CONTENT", filter.priority],
@@ -181,19 +177,16 @@ const HomePage = () => {
                             >
                                 {PageContent.map((col, index) => {
                                     return (
-                                        <Draggable draggableId={col.id} index={index} key={col.id} isDragDisabled={isDragDisabled} >
+                                        <Draggable draggableId={col.id} index={index} key={col.id} >
                                             {(provided) => (
-                                                <motion.div
-                                                    initial={{ opacity: 0, y: 30 }}
-                                                    animate={{ opacity: 1, y: 0 }}
-                                                    transition={{ duration: 0.3, delay: index * 0.1 }}
+                                                <div
                                                     {...provided.draggableProps}
                                                     ref={provided.innerRef}
                                                 >
                                                     <div {...provided.dragHandleProps}>
-                                                        <ColumnCard col={col} key={col.id} isDragDisable={isDragDisabled} />
+                                                        <ColumnCard index={index} col={col} key={col.id} isDragDisable={isDragDisabled} />
                                                     </div>
-                                                </motion.div>
+                                                </div>
                                             )}
                                         </Draggable>
                                     )
