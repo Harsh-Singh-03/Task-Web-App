@@ -1,9 +1,17 @@
-import { PrismaClient } from './generated/prisma'
+/** Local */
 
-declare global {
-  var prisma: PrismaClient | undefined;
-};
+// import { PrismaClient } from './generated/prisma'
 
-export const db = globalThis.prisma || new PrismaClient();
+// declare global {
+//   var prisma: PrismaClient | undefined;
+// };
 
-if (process.env.NODE_ENV !== "production") globalThis.prisma = db;
+// export const db = globalThis.prisma || new PrismaClient();
+
+// if (process.env.NODE_ENV !== "production") globalThis.prisma = db;
+
+/** Production with prisma cloud */
+import { PrismaClient } from '@prisma/client/edge'
+import { withAccelerate } from '@prisma/extension-accelerate'
+
+export const db = new PrismaClient().$extends(withAccelerate())

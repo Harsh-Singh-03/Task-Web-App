@@ -66,8 +66,11 @@ A modern, full-featured **Kanban-style Todo Web App** built with the latest tech
    git clone https://github.com/your-username/todo-kanban-app.git
    cd todo-kanban-app
 
-   ENVIROMENT
+# Prisma Cloud Data Proxy (used in Vercel deployment)
+- (https://cloud.prisma.io/)
+DATABASE_URL="prisma://.../your-database-id"
 
-   DATABASE_URL="DB_URL"
-   NEXTAUTH_URL="http://localhost:3000"
-   NEXTAUTH_SECRET="nextauthsecret"
+# Auth URLs
+NEXTAUTH_URL="http://localhost:3000"  # Change this to your live domain on Vercel when deploying
+NEXTAUTH_SECRET="your_nextauth_secret_here"
+
